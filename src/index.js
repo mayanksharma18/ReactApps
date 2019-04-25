@@ -150,7 +150,7 @@ function UserGreeting(props) {
     return <h1>Welcome back!</h1>
 }
 function GuestGreeting(props) {
-    return alert("Please login")
+    return <h1>Please LogIn</h1>
 }
 
 function Greeting(props) {
@@ -162,4 +162,45 @@ function Greeting(props) {
         return <GuestGreeting />
     }
 }
-ReactDOM.render(<Greeting logged={true} />, document.getElementById('root')) 
+
+
+
+
+
+
+class LoginControl extends React.Component{
+
+        constructor(props){
+            super(props)
+        this.handleClickLogin=this.handleClickLogin.bind(this);
+        this.handleClickLogOut=this.handleClickLogOut.bind(this)
+            this.state={isLoggedin:true};
+        }
+     handleClickLogin(){
+       this.setState({isLoggedin:true});
+     }
+     handleClickLogOut(){
+         this.setState({isLoggedin:false})
+     }
+
+        render(){
+            let button
+            let LoggedIn=this.state.isLoggedin
+            if(LoggedIn){
+                button=<button onClick={this.handleClickLogOut}>LogOut</button>
+            }
+            else{
+                button=<button onClick={this.handleClickLogin}>LogIn</button>
+            }
+            return (
+               <div>
+                <h1><Greeting logged={this.state.isLoggedin}/></h1>
+                {button}
+                </div>
+            )
+        }
+
+}
+
+
+ReactDOM.render(<LoginControl />, document.getElementById('root')) 
