@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
 import { setInterval } from 'timers';
+import { tsConstructorType } from '@babel/types';
 
 
 const name = "Mayank"
@@ -201,6 +202,27 @@ class LoginControl extends React.Component{
         }
 
 }
+// ReactDOM.render(<LoginControl />, document.getElementById('root')) 
 
+// /%Inline If with Logical && Operator%/
+const messages=[]
 
-ReactDOM.render(<LoginControl />, document.getElementById('root')) 
+// class PrintMessages extends React.Component{
+//     constructor(props){
+//         super(props)
+//         this.inbox=props.messages;  
+//     }
+//     render(){
+//         return(
+//         <div>{this.inbox.length>0&&<h1>You have {this.inbox.length}messages</h1>}</div>
+//     )
+//         }
+// }
+function PrintMessages(props){
+    console.log(props)
+    return (
+    <div>{props.props.length>0?<h1>You have {props.props.length}messages</h1>:<h1>You dont have any messages</h1>}</div>)
+
+}
+
+ReactDOM.render(<PrintMessages props= {messages}/>, document.getElementById('root')) 
