@@ -207,22 +207,65 @@ class LoginControl extends React.Component{
 // /%Inline If with Logical && Operator%/
 const messages=[]
 
-// class PrintMessages extends React.Component{
-//     constructor(props){
-//         super(props)
-//         this.inbox=props.messages;  
-//     }
-//     render(){
-//         return(
-//         <div>{this.inbox.length>0&&<h1>You have {this.inbox.length}messages</h1>}</div>
-//     )
-//         }
-// }
-function PrintMessages(props){
+class PrintMessages extends React.Component{
+    constructor(props){
+        super(props)
+        this.inbox=props.messages;  
+    }
+    render(){
+        return(
+        <div>{this.inbox.length>0&&<h1>You have {this.inbox.length}messages</h1>}</div>
+    )
+        }
+}
+
+//If else rendering through [?] operator
+function Printmessages(props){
     console.log(props)
     return (
     <div>{props.props.length>0?<h1>You have {props.props.length}messages</h1>:<h1>You dont have any messages</h1>}</div>)
 
 }
 
-ReactDOM.render(<PrintMessages props= {messages}/>, document.getElementById('root')) 
+// ReactDOM.render(<PrintMessages props= {messages}/>, document.getElementById('root')) 
+
+
+function Warning(status){
+    
+    console.log(status.messages)
+    let value=status.messages
+    if(!value){
+        return <h5>Lights are off please turn them on </h5>
+    }
+    else{
+        return null
+    }
+}
+class Homeautomate extends React.Component{
+    constructor(props){
+        super(props) 
+        this.switch=this.switch.bind(this)
+        this.state={Lights:false}
+    }
+    switch(){
+     if(this.state.Lights){
+         this.setState({Lights:false})
+     }
+     else{
+         this.setState({Lights:true})
+     }
+    }
+    render(){
+      return(
+          <div>
+              <h1>Welcome Home</h1>
+              <Warning messages={this.state.Lights}/>
+          <button onClick={this.switch}>{this.state.Lights?"Switch OFF the Lights":"Switch ON the Lights"}</button>
+          
+          </div>
+      )
+
+    }
+}
+ReactDOM.render(<Homeautomate/>,document.getElementById('root'))
+
