@@ -3,19 +3,19 @@ import ReactDOM from 'react-dom'
 import { setInterval } from 'timers';
 
 
-const name="Mayank"
+const name = "Mayank"
 
 function users(user) {
-    return user.firstname +""+user.lastname
-    
+    return user.firstname + "" + user.lastname
+
 }
-var data={
-    firstname:"Mayank",
-    lastname:"Sharma"
+var data = {
+    firstname: "Mayank",
+    lastname: "Sharma"
 }
 
-function check(user){
-    if(user){
+function check(user) {
+    if (user) {
 
         return <h1>{users(user)}</h1>
     }
@@ -35,12 +35,12 @@ function check(user){
 // }
 
 
-function Welcome(props){
- return (
-<div>
- <h1>{props.name}</h1>
+function Welcome(props) {
+    return (
+        <div>
+            <h1>{props.name}</h1>
 
- </div>)
+        </div>)
 }
 
 
@@ -54,60 +54,112 @@ function Welcome(props){
 //       );
 //     }
 //   }
-class Clock extends React.Component{
-  
-        //    state={date:new Date()}
-        constructor(props){
-            super(props);
-            this.state={date:new Date(),count:0};
-            console.log(this)
-            // this.increment = this.increment.bind(this)
-        }
-        componentDidMount(){
-            this.timerID=setInterval(()=>this.tick(),1000)
-        }
-        tick(){
-            this.setState({date:new Date()})
-        }
-       increment=()=>{
-            console.log(this)
-            this.setState({count:this.state.count+1})
-        }
-        // componentDidMount(){
-        //     setInterval(()=> {this.renders()},1000)
-        // }
-        // renders =()=>{
-        //     this.setState({date: new Date()})
-        // }
-        render(){
-            return(
-          <div>
-          <h1>Hello,world!</h1>
-          <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
-          <button onClick={this.increment}>Increment</button>
-          <h2>{this.state.count}</h2>
-          
-          </div>
-            )
+class Clock extends React.Component {
+
+    //    state={date:new Date()}
+    constructor(props) {
+        super(props);
+        this.state = { date: new Date(), count: 0 };
+        console.log(this)
+        // this.increment = this.increment.bind(this)
+    }
+    componentDidMount() {
+        this.timerID = setInterval(() => this.tick(), 1000)
+    }
+    tick() {
+        this.setState({ date: new Date() })
+    }
+    increment = () => {
+        console.log(this)
+        this.setState({ count: this.state.count + 1 })
+    }
+    // componentDidMount(){
+    //     setInterval(()=> {this.renders()},1000)
+    // }
+    // renders =()=>{
+    //     this.setState({date: new Date()})
+    // }
+    render() {
+        return (
+            <div>
+                <h1>Hello,world!</h1>
+                <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+                <button onClick={this.increment}>Increment</button>
+                <h2>{this.state.count}</h2>
+
+            </div>
+        )
     }
 }
-function FormattedDate(props){
+function FormattedDate(props) {
     return <h2>it is {props.date.toLocaleTimeString()}</h2>
 }
 
-   
+
 function App() {
     return (
-      <div>
-        <Clock />
-        <Clock />
-        <Clock />
-      </div>
+        <div>
+            <Clock />
+            <Clock />
+            <Clock />
+            <ActionLink />
+        </div>
     );
-  }
-    // ReactDOM.render(<Clock/>,document.getElementById('root'))
+}
+// ReactDOM.render(<Clock/>,document.getElementById('root'))
+////////////////////Event handlers
+
+function ActionLink() {
+    function handleClick(e) {
+        e.preventDefault();
+        console.log('The link was clicked')
+    }
+    return (
+        <a href='#' onClick={handleClick}>Click Me</a>
+    )
+}
+class Toggle extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { istoggle: true };
+        this.handleclick = this.handleclick.bind(this);
+    }
 
 
-ReactDOM.render(<App/>,document.getElementById('root')) 
- 
- 
+    //method
+    handleclick() {
+        console.log(this)
+        this.setState(state => ({ istoggle: !state.istoggle }));
+    }
+
+    render() {
+        return (
+            <div>
+                <button onClick={this.handleclick}>Toogle</button>
+                <h1>{this.state.istoggle ? "On" : "OF"}</h1>
+            </div>
+        )
+    }
+
+        }
+        // ReactDOM.render(<Toggle/>,document.getElementById('root')) 
+
+        ////////Condtitional Renderting
+
+function UserGreeting(props) {
+    return <h1>Welcome back!</h1>
+}
+function GuestGreeting(props) {
+    return alert("Please login")
+}
+
+function Greeting(props) {
+    const islogged = props.logged;
+    if (islogged) {
+        return <UserGreeting />
+    }
+    else {
+        return <GuestGreeting />
+    }
+}
+ReactDOM.render(<Greeting logged={true} />, document.getElementById('root')) 
