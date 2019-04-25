@@ -267,5 +267,20 @@ class Homeautomate extends React.Component{
 
     }
 }
-ReactDOM.render(<Homeautomate/>,document.getElementById('root'))
+// ReactDOM.render(<Homeautomate/>,document.getElementById('root'))
 
+//List andKeys
+// let arr=[1,2,3,4,5,6,7,8];
+// const print=arr.map((element)=><li>{element}</li>)
+// ReactDOM.render(<ul>{print}</ul>,document.getElementById('root'))
+let myNames =["Afzal","Nakul","Chinmay","Mayank"];
+function PrintList(input){
+    const value=input.props;
+    const list=value.map((i)=><li>{i}</li>)
+
+    return(
+        <div><ul>{list}</ul></div>
+    )
+   
+}
+ReactDOM.render(<PrintList props={myNames}/>,document.getElementById('root'))
