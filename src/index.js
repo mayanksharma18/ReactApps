@@ -323,7 +323,38 @@ function PrintList(input){
  }
 // ReactDOM.render(<NameForm/>,document.getElementById('root'))
 
+//Controlled form -multiple inputs
 
-ReactDOM.render(<Todo/>,document.getElementById('root'))
+class  Reservation extends React.Component{
+        constructor(props){
+            super(props)
+            this.state={
+                isGoing:true,
+                numberofGuests:2
+            };
+            this.handleInputChange = this.handleInputChange.bind(this);
+        }
+        handleInputChange(event){
+        const target=event.target;
+        console.log(target);
+        const value=target.type==='checkbox'?target.checked:target.value;
+        const name=target.name;
+        
+        }
+        render(){
+            return(
+                <form>
+                    <label>Is isGoing
+                    <input type="checkbox" name="isGoing" checked={this.state.isGoing} onChange={this.handleInputChange}/></label>
+                    <label>Number of Guests
+                    <input type="number" name="numberofGuests" value={this.state.numberofGuests } onChange={this.handleInputChange} />
+                    </label>
+                </form>
+            )
+        }
+
+}
+
+ReactDOM.render(<Reservation/>,document.getElementById('root'))
 
   

@@ -35,19 +35,14 @@ export default class Todo extends Component {
 
     render() {
         const { title, exercises } = this.state
+        console.log(exercises)
         return (<Paper>
             <Typography variant='display2' align='center' gutterBottom >Exercises</Typography>
             <form onSubmit={this.handleCreate}>
                <TextField name="title" label='Excersises' value={title} onChange={this.handleChange} margin='normal'></TextField>
                 <div><Button type='submit'color='primary'variant='raised' >Create </Button></div>
             </form>
-            <List>
-        {exercises.map(({ id, title }) =>
-          <ListItem key={id}>
-            <ListItemText primary={title} />
-          </ListItem>
-        )}
-      </List>
+
         </Paper>
         )
     }
