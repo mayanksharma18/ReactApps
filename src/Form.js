@@ -35,7 +35,6 @@ export default class Todo extends Component {
 
     render() {
         const { title, exercises } = this.state
-        console.log(exercises)
         return (<Paper>
             <Typography variant='display2' align='center' gutterBottom >Exercises</Typography>
             <form onSubmit={this.handleCreate}>

@@ -4,6 +4,8 @@ import { setInterval } from 'timers';
 import { tsConstructorType } from '@babel/types';
 import Button from '@material-ui/core/Button';
 import Todo from './Form'
+import GitProfile from './GIthub'
+import { func } from 'prop-types';
 
 
 const name = "Mayank"
@@ -330,7 +332,7 @@ class  Reservation extends React.Component{
             super(props)
             this.state={
                 isGoing:true,
-                numberofGuests:2
+                numberofGuests:""
             };
             this.handleInputChange = this.handleInputChange.bind(this);
         }
@@ -339,6 +341,9 @@ class  Reservation extends React.Component{
         console.log(target);
         const value=target.type==='checkbox'?target.checked:target.value;
         const name=target.name;
+        this.setState({
+            [name]:value
+        })
         
         }
         render(){
@@ -347,7 +352,7 @@ class  Reservation extends React.Component{
                     <label>Is isGoing
                     <input type="checkbox" name="isGoing" checked={this.state.isGoing} onChange={this.handleInputChange}/></label>
                     <label>Number of Guests
-                    <input type="number" name="numberofGuests" value={this.state.numberofGuests } onChange={this.handleInputChange} />
+                    <input type="text" name="numberofGuests" value={this.state.numberofGuests } onChange={this.handleInputChange} />
                     </label>
                 </form>
             )
@@ -355,6 +360,41 @@ class  Reservation extends React.Component{
 
 }
 
-ReactDOM.render(<Reservation/>,document.getElementById('root'))
+class Profile extends React.Component{
+       state={
+           search:"",
+           name :""
+       }
+       handleChange (event) {
+        this.setState( {search:event.target.value} )
+      }
+      
+       handleSubmit=(event)=>{
+          
+           event.preventDefault();
+           this.getdata(this.state.name)
+         
+        }
+       getdata = (name)=>{
+           this.setState({
+               name : name
+           })
+       }
+       render(){
+           return(
+               <div>
+               <form onSubmit={this.handleSubmit}>
+                <input type="text" name="profile" onChange={event => this.handleChange(event)}/>
+                <input type="Submit"/>
+               </form>
+               <GitProfile getdata = {this.getdata} props={this.state.name}/>
+               </div>
+           )
+       }
+
+}
+
+ ReactDOM.render(<Profile/>,document.getElementById('root'))
+
 
   
