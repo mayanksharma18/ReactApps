@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom'
 import { setInterval } from 'timers';
 import { tsConstructorType } from '@babel/types';
+import Button from '@material-ui/core/Button';
+import Todo from './Form'
 
 
 const name = "Mayank"
@@ -276,11 +278,52 @@ class Homeautomate extends React.Component{
 let myNames =["Afzal","Nakul","Chinmay","Mayank"];
 function PrintList(input){
     const value=input.props;
-    const list=value.map((i)=><li>{i}</li>)
+    const list=value.map((i,index)=><li keys={index}>{i}</li>)
 
     return(
         <div><ul>{list}</ul></div>
     )
    
 }
-ReactDOM.render(<PrintList props={myNames}/>,document.getElementById('root'))
+// ReactDOM.render(<PrintList props={myNames}/>,document.getElementById('root'))
+
+//Controlled Forms
+ class NameForm extends React.Component{
+      constructor(props){
+          super(props)
+          this.handleChange=this.handleChange.bind(this);
+          this.handlesubmit=this.handlesubmit.bind(this);
+          this.state={value:""}
+      }
+
+    
+      handlesubmit(event){
+        console.log(this.state.value)
+        event.preventDefault();
+      }
+
+    handleChange(event){
+      this.setState({value:event.target.value})
+    }
+
+    
+    render(){
+        return(
+            <div>
+                <form onSubmit={this.handlesubmit} action="/menu" method="post">
+                    <label>Name</label>
+                    <input type="text" value={this.state.value} onChange={this.handleChange}></input>
+                   <input></input>
+                   <p>{this.state.value}</p>
+                   
+                </form>
+            </div>
+        )
+    }
+ }
+// ReactDOM.render(<NameForm/>,document.getElementById('root'))
+
+
+ReactDOM.render(<Todo/>,document.getElementById('root'))
+
+  
