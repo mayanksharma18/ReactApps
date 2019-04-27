@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom'
 import { setInterval } from 'timers';
 import { tsConstructorType } from '@babel/types';
 import Button from '@material-ui/core/Button';
-import Todo from './Form'
-import GitProfile from './GIthub'
+import GitProfile from './Github'
 import { func } from 'prop-types';
 
 
@@ -392,7 +391,38 @@ class Profile extends React.Component{
 }
 
 
- ReactDOM.render(<Profile/>,document.getElementById('root'))
+function BoilingComponent(props){
+    if(props.celsius>=100)
+    {
+        return <h1>The water would boil</h1>
+    }
+    return <h1>The water would not boil</h1>
+}
+
+class Calculator extends React.Component{
+    state={
+        temp:""
+    }
+    handleChange=(event)=>{
+      this.setState({
+          temp:event.target.value
+      })
+    }
+
+    render(){
+        const temperature=this.state.temp;
+        return(
+            <div>
+            <input type="text" onChange={this.handleChange} />
+            <BoilingComponent celsius={parseFloat(temperature)}/>
+            </div>
+        )
+    }
+
+}
+
+
+ ReactDOM.render(<Calculator/>,document.getElementById('root'))
 
 
   
