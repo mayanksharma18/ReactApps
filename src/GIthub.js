@@ -12,18 +12,14 @@ export default class GitProfile extends React.Component{
      
       }
       
-    
-    
-      
-async componentDidMount(){
-     this.props.getdata()
-     let value = this.props.props
+ 
+       componentDidMount(){
+        console.log(this.props.props)
+   let value="mayanksharma18"
 
      const url = `https://api.github.com/users/${value}`
-  const res = await axios.get(url)
-  console.log(res)
-
-   .then(()=>{
+  axios.get(url)
+   .then((res)=>{
     this.setState({
         login:res.data.login,
         avatar_url:res.data.avatar_url,

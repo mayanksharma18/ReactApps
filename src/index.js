@@ -361,38 +361,36 @@ class  Reservation extends React.Component{
 }
 
 class Profile extends React.Component{
-       state={
-           search:"",
-           name :""
-       }
-       handleChange (event) {
-        this.setState( {search:event.target.value} )
+      state={
+          search:""
       }
-      
-       handleSubmit=(event)=>{
-          
-           event.preventDefault();
-           this.getdata(this.state.name)
-         
-        }
-       getdata = (name)=>{
-           this.setState({
-               name : name
-           })
-       }
-       render(){
-           return(
-               <div>
-               <form onSubmit={this.handleSubmit}>
-                <input type="text" name="profile" onChange={event => this.handleChange(event)}/>
-                <input type="Submit"/>
-               </form>
-               <GitProfile getdata = {this.getdata} props={this.state.name}/>
-               </div>
-           )
-       }
 
+      handleChange=(event)=>{
+          
+       this.setState({
+           search:event.target.value
+       })
+      }
+      handlesubmit=(event)=>{
+        event.preventDefault();
+        let search=event.name
+        this.setState({
+            search:event.target.value
+        })
+      }
+    render(){
+        return(
+            <div>
+               <form onSubmit={this.handleSubmit}>
+                   <input type="text" name="input"  onChange={this.handleChange}/>
+                   <input type="submit"/>
+               </form>
+                <GitProfile props={this.state.search}/>
+            </div>
+        )
+    }
 }
+
 
  ReactDOM.render(<Profile/>,document.getElementById('root'))
 
